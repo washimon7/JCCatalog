@@ -8,6 +8,10 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import dev.enritech.jccatalog.model.Routes
 import dev.enritech.jccatalog.ui.theme.JCCatalogTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +24,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MyScaffold()
+                    val navigationController = rememberNavController()
+
+                    NavHost(
+                        navController = navigationController,
+                        startDestination = Routes.Screen1.route
+                    ) {
+                        composable(Routes.Screen1.route) { Screen1(navigationController) }
+                        composable(Routes.Screen2.route) { Screen2(navigationController) }
+                        composable(Routes.Screen3.route) { Screen3(navigationController) }
+                    }
                 }
             }
         }
