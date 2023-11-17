@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavHostController
+import dev.enritech.jccatalog.model.Routes
 
 import dev.enritech.jccatalog.model.Routes.*
 
@@ -56,6 +57,72 @@ fun Screen3(navigationController: NavHostController) {
         verticalArrangement = Arrangement.Center
     ) {
         Text(text = "Screen 3")
+        Text(
+            text = "Ir a pantalla 4",
+            modifier = Modifier.clickable {
+                navigationController.navigate(
+                    Screen4.createRoute(
+                        "washimon7"
+                    )
+                )
+            })
+    }
+}
+
+@Composable
+fun Screen4(navigationController: NavHostController, user: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Cyan),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Screen 4")
+        Text(text = "Hola $user")
+        Text(
+            text = "Ir a pantalla 5",
+            modifier = Modifier.clickable {
+                navigationController.navigate(
+                    Screen5.createRoute(
+                        2
+                    )
+                )
+            })
+    }
+}
+
+@Composable
+fun Screen5(navigationController: NavHostController, winnersCount: Int) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.LightGray),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Screen 5")
+        Text(text = "Tenemos $winnersCount ganadores!")
+        Text(
+            text = "Ir a pantalla 6",
+            modifier = Modifier.clickable { navigationController.navigate(Screen6.createRoute()) })
+    }
+}
+
+@Composable
+fun Screen6(navigationController: NavHostController, qualifiedUser: Boolean?) {
+    println(qualifiedUser)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Gray),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Screen 6")
+        if (qualifiedUser == true)
+            Text(text = "Usted tiene un préstamo preaprobado") else
+            Text(text = "¡Nos alegra tenerte con nosotros!")
         Text(
             text = "Ir a pantalla 1",
             modifier = Modifier.clickable { navigationController.navigate(Screen1.route) })
